@@ -35,11 +35,11 @@ Articles are available in `german` and `irish` too.
     {
       "name":"articleId",
       "required":true,
-      "verifier":[
+      "validators":[
         {
           "name":"regEx",
           "parameters":{
-            "matches":"[a-z]"
+            "pattern":"[a-z]"
           }
         },
         {
@@ -60,7 +60,7 @@ Articles are available in `german` and `irish` too.
       "name":"language",
       "required":false,
       "default":"english",
-      "verifier":[
+      "validators":[
         {
           "name":"setOf",
           "parameters":{
