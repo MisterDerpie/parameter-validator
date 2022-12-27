@@ -1,6 +1,5 @@
 package com.misterderpie.parametervalidator.model
 
-
 class ValidationException(reason: String) : Exception(reason)
 
 @Retention(AnnotationRetention.RUNTIME)

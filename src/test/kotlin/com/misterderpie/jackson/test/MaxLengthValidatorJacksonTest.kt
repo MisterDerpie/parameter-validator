@@ -2,13 +2,11 @@ package com.misterderpie.jackson.test
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.misterderpie.parametervalidator.model.ValidationException
-import com.misterderpie.parametervalidator.model.Validator
 import com.misterderpie.test.createKotlinMapper
 import com.misterderpie.validators.MaxLengthValidator
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
-import kotlin.reflect.full.findAnnotation
 import kotlin.reflect.full.primaryConstructor
 import kotlin.reflect.jvm.jvmErasure
 import kotlin.test.assertEquals

@@ -31,6 +31,5 @@ class AnnotationTest {
 
         val instance = primaryConstructor.callBy(out) as AnnotatedClass
         assertEquals("1", instance.input)
-
     }
 }
