@@ -1,8 +1,8 @@
-package com.misterderpie.parametervalidator.validators
+package com.misterderpie.jackson.test
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.misterderpie.parametervalidator.model.ValidationException
 import com.misterderpie.parametervalidator.model.Validator
-import com.misterderpie.parametervalidator.model.ValidatorException
 import com.misterderpie.test.createKotlinMapper
 import com.misterderpie.validators.MaxLengthValidator
 import org.junit.jupiter.api.Test
@@ -10,11 +10,12 @@ import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import kotlin.reflect.full.findAnnotation
 import kotlin.reflect.full.primaryConstructor
+import kotlin.reflect.jvm.jvmErasure
 import kotlin.test.assertEquals
 
-class MaxLengthValidatorTest {
+class MaxLengthValidatorJacksonTest {
 
-    val objectMapper = ObjectMapper().createKotlinMapper()
+    private val objectMapper = ObjectMapper().createKotlinMapper()
 
     @Test
     fun `instantiate from JSON template`() {
@@ -28,14 +29,14 @@ class MaxLengthValidatorTest {
         val parametersJsonNode = validatorJsonNode.get("parameters")
 
         val maxLengthClass = MaxLengthValidator::class
-        val annotation = maxLengthClass.findAnnotation<Validator>() ?: throw Exception("Validator not present")
-        val parametersClass = Class.forName(annotation.parametersType.qualifiedName)
-        val parametersInstance = objectMapper.treeToValue(parametersJsonNode, parametersClass)
+        val parametersType = maxLengthClass.primaryConstructor!!.parameters.get(0).type.jvmErasure.java
+
+        val parametersInstance = objectMapper.treeToValue(parametersJsonNode, parametersType)
 
         val constructor = maxLengthClass.primaryConstructor ?: throw Exception("No primary constructor found")
         val instance = constructor.call(parametersInstance)
 
         assertDoesNotThrow { instance.validate("123") }
-        assertThrows<ValidatorException> { instance.validate("0".repeat(11)) }
+        assertThrows<ValidationException> { instance.validate("0".repeat(11)) }
     }
 }
