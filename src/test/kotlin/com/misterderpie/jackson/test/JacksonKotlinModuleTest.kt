@@ -15,7 +15,7 @@ class JacksonKotlinModuleTest {
     annotation class TestAnnotation
     data class TestClass(val name: String, val age: Int) {
         @TestAnnotation
-        fun testFun(name: String) {}
+        fun testFun(name: String) { println(name) }
     }
 
     @Test
