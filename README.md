@@ -31,9 +31,8 @@ Articles are available in `german` and `irish` too.
 ```json
 {
   "templateName":"EncyclopediaArticleRequestValidation",
-  "parameters":[
-    {
-      "name":"articleId",
+  "parameters":{
+    "articleId":{
       "required":true,
       "validators":[
         {
@@ -56,8 +55,7 @@ Articles are available in `german` and `irish` too.
         }
       ]
     },
-    {
-      "name":"language",
+    "language":{
       "required":false,
       "default":"english",
       "validators":[
@@ -71,6 +69,6 @@ Articles are available in `german` and `irish` too.
         }
       ]
     }
-  ]
+  }
 }
 ```
