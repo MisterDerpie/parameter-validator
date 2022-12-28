@@ -1,4 +1,4 @@
-package com.misterderpie.parametervalidator.engine.fakepath
+package com.misterderpie.parametervalidator.engine.happypath
 
 import com.misterderpie.parametervalidator.engine.ParameterValidatorFactory
 import com.misterderpie.parametervalidator.engine.ValidatorNotFoundException
@@ -9,19 +9,27 @@ import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertEquals
 
 @Validator("first")
-class FirstValidator
+class FirstValidator {
+    fun validate(a: Int, b: Int) {
+        println("$a$b")
+    }
+}
 
 @Validator("second")
-class SecondValidator
+class SecondValidator {
+    fun validate(a: Int, b: Int) {
+        println("$a$b")
+    }
+}
 
 class ParameterValidatorFactoryTest {
 
+    val defaultFactory = ParameterValidatorFactory("com.misterderpie.parametervalidator.engine.happypath")
+
     @Test
     fun `when class path provided it finds validators`() {
-        val parameterValidatorFactory =
-            ParameterValidatorFactory("com.misterderpie.parametervalidator.engine.fakepath")
-        assertEquals(FirstValidator::class.java, parameterValidatorFactory.getValidator("first"))
-        assertEquals(SecondValidator::class.java, parameterValidatorFactory.getValidator("second"))
+        assertEquals(FirstValidator::class.java, defaultFactory.getValidator("first"))
+        assertEquals(SecondValidator::class.java, defaultFactory.getValidator("second"))
     }
 
     @Test

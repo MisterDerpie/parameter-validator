@@ -4,11 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.misterderpie.parametervalidator.model.ValidationException
 import com.misterderpie.test.createKotlinMapper
 import com.misterderpie.validators.MaxLengthValidator
+import com.misterderpie.validators.MaxLengthValidatorParameters
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import kotlin.reflect.full.primaryConstructor
-import kotlin.reflect.jvm.jvmErasure
 import kotlin.test.assertEquals
 
 class MaxLengthValidatorJacksonTest {
@@ -27,14 +27,16 @@ class MaxLengthValidatorJacksonTest {
         val parametersJsonNode = validatorJsonNode.get("parameters")
 
         val maxLengthClass = MaxLengthValidator::class
-        val parametersType = maxLengthClass.primaryConstructor!!.parameters.get(0).type.jvmErasure.java
+        val validateMethod = maxLengthClass.java.methods.first { it.name == "validate" }
+        val parametersType = validateMethod.parameters.get(1).type
 
-        val parametersInstance = objectMapper.treeToValue(parametersJsonNode, parametersType)
+        val parametersInstance =
+            objectMapper.treeToValue(parametersJsonNode, parametersType) as MaxLengthValidatorParameters
 
         val constructor = maxLengthClass.primaryConstructor ?: throw Exception("No primary constructor found")
-        val instance = constructor.call(parametersInstance)
+        val instance = constructor.call()
 
-        assertDoesNotThrow { instance.validate("123") }
-        assertThrows<ValidationException> { instance.validate("0".repeat(11)) }
+        assertDoesNotThrow { instance.validate("123", parametersInstance) }
+        assertThrows<ValidationException> { instance.validate("0".repeat(11), parametersInstance) }
     }
 }
