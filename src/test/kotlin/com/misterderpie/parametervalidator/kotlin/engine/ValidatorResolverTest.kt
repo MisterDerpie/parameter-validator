@@ -1,6 +1,6 @@
-package com.misterderpie.parametervalidator.engine
+package com.misterderpie.parametervalidator.kotlin.engine
 
-import com.misterderpie.parametervalidator.model.Validator
+import com.misterderpie.parametervalidator.kotlin.model.Validator
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertEquals
@@ -15,7 +15,7 @@ class ValidatorResolverTest {
 
     @Test
     fun `when providing package path to resolver then it finds validators`() {
-        val validatorResolver = ValidatorResolver("com.misterderpie.parametervalidator.engine")
+        val validatorResolver = ValidatorResolver("com.misterderpie.parametervalidator.kotlin.engine")
         val myValidator = validatorResolver.getValidator("myValidator")
         val mySecondValidator = validatorResolver.getValidator("mySecondValidator")
 

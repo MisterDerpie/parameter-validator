@@ -30,7 +30,7 @@ Articles are available in `german` and `irish` too.
 
 ```json
 {
-  "templateName":"EncyclopediaArticleRequestValidation",
+  "name":"EncyclopediaArticleRequestValidation",
   "parameters":{
     "articleId":{
       "required":true,

@@ -1,7 +1,7 @@
 package com.misterderpie.validators
 
-import com.misterderpie.parametervalidator.model.ValidationException
-import com.misterderpie.parametervalidator.model.Validator
+import com.misterderpie.parametervalidator.kotlin.model.ValidationException
+import com.misterderpie.parametervalidator.kotlin.model.Validator
 
 data class MaxLengthValidatorParameters(val length: Int)
 

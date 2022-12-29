@@ -1,6 +1,6 @@
-package com.misterderpie.parametervalidator.engine
+package com.misterderpie.parametervalidator.kotlin.engine
 
-import com.misterderpie.parametervalidator.model.Validator
+import com.misterderpie.parametervalidator.kotlin.model.Validator
 import org.reflections.Reflections
 import java.util.logging.Logger
 

@@ -1,4 +1,4 @@
-package com.misterderpie.parametervalidator.model
+package com.misterderpie.parametervalidator.kotlin.model
 
 class ValidationException(reason: String) : Exception(reason)
 
