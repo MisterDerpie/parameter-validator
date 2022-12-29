@@ -38,7 +38,7 @@ It allows `english`, `german` and `irish`.
         {
           "name":"regEx",
           "parameters":{
-            "pattern":"[a-z]"
+            "pattern":"[a-z]+"
           }
         },
         {
@@ -62,7 +62,7 @@ It allows `english`, `german` and `irish`.
           "name":"setOf",
           "parameters":{
             "set":[
-              "english, german, irish"
+              "english", "german", "irish"
             ]
           }
         }

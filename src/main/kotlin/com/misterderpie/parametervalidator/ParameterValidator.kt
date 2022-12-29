@@ -14,15 +14,14 @@ class ParameterValidator(
 
     fun validate(
         parameters: Map<String, Any>,
-        validatorTemplate: Template,
-        factory: ParameterValidatorFactory
+        validatorTemplate: Template
     ) {
         validatorTemplate.parameters.forEach { configuration ->
             val name = configuration.key
             val parameterConfiguration = configuration.value
             when (parameterConfiguration.required) {
-                true -> validate(getRequiredParameter(name, parameters), parameterConfiguration, factory)
-                false -> parameters[name]?.let { validate(it, parameterConfiguration, factory) }
+                true -> validate(getRequiredParameter(name, parameters), parameterConfiguration, validatorFactory)
+                false -> parameters[name]?.let { validate(it, parameterConfiguration, validatorFactory) }
             }
         }
     }

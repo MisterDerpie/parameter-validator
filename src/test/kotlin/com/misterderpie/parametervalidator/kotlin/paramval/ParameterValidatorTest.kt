@@ -65,7 +65,7 @@ class ParameterValidatorTest {
     @Test
     fun `when validator invoked with accepted value it will not throw exception`() {
         val parameters = mapOf("test" to "value")
-        assertDoesNotThrow { defaultParameterValidator.validate(parameters, defaultTemplate, defaultValidatorFactory) }
+        assertDoesNotThrow { defaultParameterValidator.validate(parameters, defaultTemplate) }
     }
 
     @ParameterizedTest(name = "Validation fails for length with shortest 3 longest 10 for: {0}")
@@ -75,8 +75,7 @@ class ParameterValidatorTest {
         assertThrows<ValidationException> {
             defaultParameterValidator.validate(
                 parameters,
-                defaultTemplate,
-                defaultValidatorFactory
+                defaultTemplate
             )
         }
     }
@@ -108,7 +107,7 @@ class ParameterValidatorTest {
     @Test
     fun `when parameter not required then it will pass validation`() {
         val template = TemplateParser.fromTemplate(nonRequiredParameterJson)
-        assertDoesNotThrow { defaultParameterValidator.validate(emptyMap(), template, defaultValidatorFactory) }
+        assertDoesNotThrow { defaultParameterValidator.validate(emptyMap(), template) }
     }
 
     @Test
@@ -117,8 +116,7 @@ class ParameterValidatorTest {
         assertThrows<ValidationException> {
             defaultParameterValidator.validate(
                 mapOf("test" to "a".repeat(11)),
-                template,
-                defaultValidatorFactory
+                template
             )
         }
     }
