@@ -3,6 +3,8 @@
 This repository contains a proof of concept.
 It is mainly to work with reflection and also try out the idea.
 
+To see the caveats and learnings, scroll to the bottom below example.
+
 ## Motivation
 
 Many software applications receive parameters provided by the user as their input.
@@ -71,3 +73,43 @@ It allows `english`, `german` and `irish`.
   }
 }
 ```
+
+## Learnings, Caveats
+
+As this is a proof of concept, I find it reasonable to share learnings as well.
+One main learning is that by default Jackson does not enforce `null` for primitive data types.
+To do so, one needs to configure the mapper with `DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES`.
+
+The main caveat lies in using reflection to resolve the validator classes at runtime.
+Whilst that primarily was "for fun" reasons, it has more downsides than benefits (if there is any).
+
+### Validators need no-arg constructor
+
+That is due to the nature of how the resolver creates their instances, to then call validate.
+Not providing argument constructors drastically limits the ability of the validators.
+Suppose the `setOf` validator wants to read from a cache or database.
+The clients could not be provided to the class (except using more reflection).
+
+### Validate function needs to match format
+
+Another downside is that the `validate` function needs to be unique and accept exactly two parameters.
+Moreover, these parameters need to be in the order that the invoker expects them.
+That is, the first parameter **must** be the value that it expects.
+The second parameter **must** be what the class expects to retrieve as parameters from the template.
+
+### Tackle the previous issues
+
+Both of these issues could be tackled by avoiding runtime resolution using reflection.
+An enhancement could be introducing the interface
+
+```kotlin
+interface Validator<I, P> {
+    fun validate(value: I, parameters: P)
+}
+```
+
+that must be implemented by all validators.
+They could then be registered to a resolver.
+The only reflection needed would then be to find out I and P at runtime to cast the provided values.
+Side note to the previous sentence:
+I have not checked whether these types are only available at compile time.
