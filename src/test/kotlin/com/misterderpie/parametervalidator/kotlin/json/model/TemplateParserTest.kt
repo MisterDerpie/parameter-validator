@@ -7,7 +7,7 @@ import com.misterderpie.parametervalidator.json.engine.TemplateParser
 import com.misterderpie.parametervalidator.json.model.ParameterConfiguration
 import com.misterderpie.parametervalidator.json.model.Template
 import com.misterderpie.test.createKotlinMapper
-import com.misterderpie.validators.MaxLengthValidatorParameters
+import com.misterderpie.validators.ValidationLengthParameters
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertContains
@@ -49,7 +49,7 @@ class TemplateParserTest {
         val validator = articleIdParameterConfiguration.validators[0]
         assertEquals("maxLength", validator.name)
 
-        val maxLengthParameters: MaxLengthValidatorParameters = objectMapper.treeToValue(validator.parameters)
+        val maxLengthParameters: ValidationLengthParameters = objectMapper.treeToValue(validator.parameters)
         assertEquals(10, maxLengthParameters.length)
     }
 

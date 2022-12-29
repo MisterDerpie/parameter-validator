@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
 plugins {
     kotlin("jvm") version "1.7.21"
@@ -34,4 +35,10 @@ tasks.withType<KotlinCompile> {
 
 application {
     mainClass.set("MainKt")
+}
+
+configure<KtlintExtension> {
+    filter {
+        exclude { it.file.path.contains("CommonParameters.kt") }
+    }
 }

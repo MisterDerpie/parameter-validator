@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.misterderpie.parametervalidator.kotlin.model.ValidationException
 import com.misterderpie.test.createKotlinMapper
 import com.misterderpie.validators.MaxLengthValidator
-import com.misterderpie.validators.MaxLengthValidatorParameters
+import com.misterderpie.validators.ValidationLengthParameters
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
@@ -31,7 +31,7 @@ class MaxLengthValidatorJacksonTest {
         val parametersType = validateMethod.parameters.get(1).type
 
         val parametersInstance =
-            objectMapper.treeToValue(parametersJsonNode, parametersType) as MaxLengthValidatorParameters
+            objectMapper.treeToValue(parametersJsonNode, parametersType) as ValidationLengthParameters
 
         val constructor = maxLengthClass.primaryConstructor ?: throw Exception("No primary constructor found")
         val instance = constructor.call()
