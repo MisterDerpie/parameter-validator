@@ -1,8 +1,6 @@
-package com.misterderpie.parametervalidator.validators
+package com.misterderpie.validators
 
 import com.misterderpie.parametervalidator.kotlin.model.ValidationException
-import com.misterderpie.validators.MinLengthValidator
-import com.misterderpie.validators.ValidationLengthParameters
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows

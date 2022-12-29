@@ -1,8 +1,6 @@
-package com.misterderpie.parametervalidator.validators
+package com.misterderpie.validators
 
 import com.misterderpie.parametervalidator.kotlin.model.ValidationException
-import com.misterderpie.validators.RegExParameters
-import com.misterderpie.validators.RegExValidator
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows

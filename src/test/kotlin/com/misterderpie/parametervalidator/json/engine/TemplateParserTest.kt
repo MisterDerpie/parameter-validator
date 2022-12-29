@@ -1,9 +1,8 @@
-package com.misterderpie.parametervalidator.kotlin.json.model
+package com.misterderpie.parametervalidator.json.engine
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.MissingKotlinParameterException
 import com.fasterxml.jackson.module.kotlin.treeToValue
-import com.misterderpie.parametervalidator.json.engine.TemplateParser
 import com.misterderpie.parametervalidator.json.model.ParameterConfiguration
 import com.misterderpie.parametervalidator.json.model.Template
 import com.misterderpie.test.createKotlinMapper

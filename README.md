@@ -25,8 +25,8 @@ The mandatory parameter is `articleId`.
 An `articleId` may only contain lowercase letters and thus has a RegEx verifier.
 Moreover, it's length must be at least 1 and at most 10 characters.
 
-An optional parameter `language` defaults to `english`.
-Articles are available in `german` and `irish` too.
+An optional parameter `language` can be provided.
+It allows `english`, `german` and `irish`.
 
 ```json
 {

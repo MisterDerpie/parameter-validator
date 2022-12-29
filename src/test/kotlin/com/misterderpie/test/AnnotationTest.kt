@@ -1,4 +1,4 @@
-package com.misterderpie.annotations.test
+package com.misterderpie.test
 
 import org.junit.jupiter.api.Test
 import org.reflections.Reflections

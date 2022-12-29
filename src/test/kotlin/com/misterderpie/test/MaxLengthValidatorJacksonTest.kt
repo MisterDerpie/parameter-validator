@@ -1,8 +1,7 @@
-package com.misterderpie.jackson.test
+package com.misterderpie.test
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.misterderpie.parametervalidator.kotlin.model.ValidationException
-import com.misterderpie.test.createKotlinMapper
 import com.misterderpie.validators.MaxLengthValidator
 import com.misterderpie.validators.ValidationLengthParameters
 import org.junit.jupiter.api.Test

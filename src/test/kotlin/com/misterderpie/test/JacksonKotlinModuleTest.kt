@@ -1,4 +1,4 @@
-package com.misterderpie.jackson.test
+package com.misterderpie.test
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.exc.MismatchedInputException
