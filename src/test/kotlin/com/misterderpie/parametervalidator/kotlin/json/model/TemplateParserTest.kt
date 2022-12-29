@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.MissingKotlinParameterException
 import com.fasterxml.jackson.module.kotlin.treeToValue
 import com.misterderpie.parametervalidator.json.engine.TemplateParser
-import com.misterderpie.parametervalidator.json.model.Parameter
+import com.misterderpie.parametervalidator.json.model.ParameterConfiguration
 import com.misterderpie.parametervalidator.json.model.Template
 import com.misterderpie.test.createKotlinMapper
 import com.misterderpie.validators.MaxLengthValidatorParameters
@@ -43,10 +43,10 @@ class TemplateParserTest {
 
         assertTrue { parameters.containsKey("articleId") }
 
-        val articleIdParameter: Parameter = parameters["articleId"]!!
-        assertEquals(1, articleIdParameter.validators.size)
+        val articleIdParameterConfiguration: ParameterConfiguration = parameters["articleId"]!!
+        assertEquals(1, articleIdParameterConfiguration.validators.size)
 
-        val validator = articleIdParameter.validators[0]
+        val validator = articleIdParameterConfiguration.validators[0]
         assertEquals("maxLength", validator.name)
 
         val maxLengthParameters: MaxLengthValidatorParameters = objectMapper.treeToValue(validator.parameters)

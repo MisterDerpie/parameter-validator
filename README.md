@@ -57,7 +57,6 @@ Articles are available in `german` and `irish` too.
     },
     "language":{
       "required":false,
-      "default":"english",
       "validators":[
         {
           "name":"setOf",

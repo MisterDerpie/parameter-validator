@@ -4,11 +4,19 @@ import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import kotlin.reflect.full.createInstance
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class ParameterValidatorFactoryTest {
     private val validatorResolver = mockk<ValidatorResolver>()
     private val defaultValidatorName = "test"
+
+    @Test
+    fun `when existing validator requested from factory then that is returned`() {
+        val factory = setupFactory(TestValidatorProper::class.java)
+        assertTrue { factory.getValidatorInstance(defaultValidatorName) is TestValidatorProper }
+    }
 
     @Test
     fun `when exactly one method with two arguments is found then it returns that method`() {
@@ -34,8 +42,9 @@ class ParameterValidatorFactoryTest {
         validator: Class<out Any>,
         validatorName: String = defaultValidatorName
     ): ParameterValidatorFactory {
-        every { validatorResolver.validatorsMap } returns mapOf(validatorName to validator)
-        every { validatorResolver.getValidator(validatorName) } returns validator
+        val validatorInstance = ValidatorResolver.ValidatorInstance(validator, validator.kotlin.createInstance())
+        every { validatorResolver.validatorsMap } returns mapOf(validatorName to validatorInstance)
+        every { validatorResolver.getValidator(validatorName) } returns validatorInstance
         return ParameterValidatorFactory(validatorResolver)
     }
 

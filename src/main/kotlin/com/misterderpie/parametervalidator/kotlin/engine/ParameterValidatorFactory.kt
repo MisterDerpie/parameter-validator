@@ -13,8 +13,11 @@ class ParameterValidatorFactory(
     private val validatorResolver: ValidatorResolver
 ) {
 
+    fun getValidatorInstance(name: String): Any {
+        return validatorResolver.getValidator(name).instance
+    }
     fun getValidateMethod(name: String): KFunction<*> {
-        val validatorClass = validatorResolver.getValidator(name)
+        val validatorClass = validatorResolver.getValidator(name).clazz
         val validatorMethods = validatorClass.methods.filter { it.name == "validate" && it.parameters.size == 2 }
 
         val size = validatorMethods.size

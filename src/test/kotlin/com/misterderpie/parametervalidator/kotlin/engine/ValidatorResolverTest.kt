@@ -4,6 +4,7 @@ import com.misterderpie.parametervalidator.kotlin.model.Validator
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 @Validator(name = "myValidator")
 class MyValidator
@@ -19,8 +20,11 @@ class ValidatorResolverTest {
         val myValidator = validatorResolver.getValidator("myValidator")
         val mySecondValidator = validatorResolver.getValidator("mySecondValidator")
 
-        assertEquals(MyValidator::class.java, myValidator)
-        assertEquals(MySecondValidator::class.java, mySecondValidator)
+        assertEquals(MyValidator::class.java, myValidator.clazz)
+        assertEquals(MySecondValidator::class.java, mySecondValidator.clazz)
+
+        assertTrue { myValidator.instance is MyValidator }
+        assertTrue { mySecondValidator.instance is MySecondValidator }
     }
 
     @Test
