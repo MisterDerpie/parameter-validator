@@ -9,7 +9,7 @@ class ParameterNotFoundException(name: String) : Exception("Could not find param
 
 class ParameterValidator(
     private val validatorFactory: ParameterValidatorFactory,
-    private val validatorInvoke: ValidatorInvoke
+    private val validatorInvoke: ValidatorInvoke = ValidatorInvoke()
 ) {
 
     fun validate(
